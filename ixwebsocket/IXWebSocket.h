@@ -121,6 +121,8 @@ namespace ix
 
         void setAutoThreadName(bool enabled);
 
+        void clearSendBuffer();
+
     private:
         WebSocketSendInfo sendMessage(const IXWebSocketSendData& message,
                                       SendMessageKind sendMessageKind,

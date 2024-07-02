@@ -117,6 +117,8 @@ namespace ix
         // send any type of ping packet, not only 'ping' type
         WebSocketSendInfo sendHeartBeat(SendMessageKind pingType);
 
+        void clearSendBuffer();
+
     private:
         std::string _url;
 
@@ -218,6 +220,7 @@ namespace ix
         // Optional ping and pong timeout
         int _pingIntervalSecs;
         std::atomic<bool> _pongReceived;
+        std::atomic<bool> _pongExpected;
 
         static const int kDefaultPingIntervalSecs;
 
@@ -231,12 +234,12 @@ namespace ix
         std::chrono::time_point<std::chrono::steady_clock> _lastSendPingTimePoint;
 
         // If this function returns true, it is time to send a new ping
-        bool pingIntervalExceeded();
+        bool pingIntervalExceeded() const;
         void initTimePointsAfterConnect();
 
         // after calling close(), if no CLOSE frame answer is received back from the remote, we
         // should close the connexion
-        bool closingDelayExceeded();
+        bool closingDelayExceeded() const;
 
         void sendCloseFrame(uint16_t code, const std::string& reason);
 

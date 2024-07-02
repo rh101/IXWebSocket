@@ -72,6 +72,7 @@ namespace ix
         , _enablePong(kDefaultEnablePong)
         , _pingIntervalSecs(kDefaultPingIntervalSecs)
         , _pongReceived(false)
+		, _pongExpected(false)
         , _setCustomMessage(false)
         , _kPingMessage("ixwebsocket::heartbeat")
         , _pingType(SendMessageKind::Ping)
@@ -223,6 +224,7 @@ namespace ix
         {
             initTimePointsAfterConnect();
             _pongReceived = false;
+            _pongExpected = false;
         }
 
         _readyState = readyState;
@@ -242,7 +244,7 @@ namespace ix
     }
 
     // Only consider send PING time points for that computation.
-    bool WebSocketTransport::pingIntervalExceeded()
+    bool WebSocketTransport::pingIntervalExceeded() const
     {
         if (_pingIntervalSecs <= 0) return false;
 
@@ -261,6 +263,7 @@ namespace ix
     WebSocketSendInfo WebSocketTransport::sendHeartBeat(SendMessageKind pingMessage)
     {
         _pongReceived = false;
+        _pongExpected = false;
         std::stringstream ss;
 
         ss << _kPingMessage;
@@ -280,6 +283,7 @@ namespace ix
             {
                 std::lock_guard<std::mutex> lck(_lastSendPingTimePointMutex);
                 _lastSendPingTimePoint = std::chrono::steady_clock::now();
+                _pongExpected = true;
             }
             return info;
         }
@@ -290,6 +294,7 @@ namespace ix
             {
                 std::lock_guard<std::mutex> lck(_lastSendPingTimePointMutex);
                 _lastSendPingTimePoint = std::chrono::steady_clock::now();
+                _pongExpected = true;
             }
             return info;
         }
@@ -298,7 +303,7 @@ namespace ix
         return {};
     }
 
-    bool WebSocketTransport::closingDelayExceeded()
+    bool WebSocketTransport::closingDelayExceeded() const
     {
         std::lock_guard<std::mutex> lock(_closingTimePointMutex);
         auto now = std::chrono::steady_clock::now();
@@ -459,7 +464,7 @@ namespace ix
         {
             wsheader_type ws;
             if (_rxbuf.size() < 2) break;                /* Need at least 2 */
-            const uint8_t* data = (uint8_t*) &_rxbuf[0]; // peek, but don't consume
+            const uint8_t* data = _rxbuf.data(); // peek, but don't consume
             ws.fin = (data[0] & 0x80) == 0x80;
             ws.rsv1 = (data[0] & 0x40) == 0x40;
             ws.rsv2 = (data[0] & 0x20) == 0x20;
@@ -646,7 +651,17 @@ namespace ix
             }
             else if (ws.opcode == wsheader_type::PONG)
             {
-                _pongReceived = true;
+                if (!_pongExpected)
+                {
+                    // unidirectional heart-beat from server
+                    std::lock_guard<std::mutex> lock(_lastSendPingTimePointMutex);
+                    _lastSendPingTimePoint = std::chrono::steady_clock::now();
+                }
+                else
+                {
+                    _pongExpected = false;
+                    _pongReceived = true;
+                }
                 emitMessage(MessageKind::PONG, frameData, false, onMessageCallback);
             }
             else if (ws.opcode == wsheader_type::CLOSE)
@@ -1033,6 +1048,7 @@ namespace ix
         {
             std::lock_guard<std::mutex> lck(_lastSendPingTimePointMutex);
             _lastSendPingTimePoint = std::chrono::steady_clock::now();
+            _pongExpected = true;
         }
 
         return info;
@@ -1058,12 +1074,12 @@ namespace ix
     {
         std::lock_guard<std::mutex> lock(_txbufMutex);
 
-        while (_txbuf.size())
+        while (!_txbuf.empty())
         {
             ssize_t ret = 0;
             {
                 std::lock_guard<std::mutex> lock(_socketMutex);
-                ret = _socket->send((char*) &_txbuf[0], _txbuf.size());
+                ret = _socket->send((char*)_txbuf.data(), _txbuf.size());
             }
 
             if (ret < 0 && Socket::isWaitNeeded())
@@ -1092,7 +1108,7 @@ namespace ix
     {
         while (true)
         {
-            ssize_t ret = _socket->recv((char*) &_readbuf[0], _readbuf.size());
+            ssize_t ret = _socket->recv(_readbuf.data(), _readbuf.size());
 
             if (ret < 0 && Socket::isWaitNeeded())
             {
@@ -1114,6 +1130,12 @@ namespace ix
         }
 
         return true;
+    }
+
+    void WebSocketTransport::clearSendBuffer()
+    {
+        std::lock_guard<std::mutex> lock(_txbufMutex);
+        _txbuf.clear();
     }
 
     void WebSocketTransport::sendCloseFrame(uint16_t code, const std::string& reason)

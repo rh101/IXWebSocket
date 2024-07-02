@@ -17,9 +17,9 @@ namespace ix
         std::string reason;
         bool remote;
 
-        WebSocketCloseInfo(uint16_t c = 0, const std::string& r = std::string(), bool rem = false)
+        WebSocketCloseInfo(uint16_t c = 0, std::string r = std::string(), bool rem = false)
             : code(c)
-            , reason(r)
+            , reason(std::move(r))
             , remote(rem)
         {
             ;

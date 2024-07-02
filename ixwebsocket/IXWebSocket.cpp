@@ -208,10 +208,10 @@ namespace ix
         }
 
         WebSocketHttpHeaders headers(_extraHeaders);
-        std::string subProtocolsHeader;
-        const auto &subProtocols = getSubProtocols();
+        auto& subProtocols = getSubProtocols();
         if (!subProtocols.empty())
         {
+	        std::string subProtocolsHeader;
             //
             // Sub Protocol strings are comma separated.
             // Python code to do that is:
@@ -219,7 +219,7 @@ namespace ix
             // 'json,msgpack'
             //
             int i = 0;
-            for (const auto & subProtocol : subProtocols)
+            for (auto& subProtocol : subProtocols)
             {
                 if (i++ != 0)
                 {
@@ -310,7 +310,7 @@ namespace ix
         uint32_t retries = 0;
         millis duration(0);
 
-        // Try to connect perpertually
+        // Try to connect perpetually
         while (true)
         {
             if (isConnected() || isClosing() || _stop)
@@ -635,5 +635,10 @@ namespace ix
     void WebSocket::setAutoThreadName(bool enabled)
     {
         _autoThreadName = enabled;
+    }
+
+    void WebSocket::clearSendBuffer()
+    {
+        _ws.clearSendBuffer();
     }
 } // namespace ix
