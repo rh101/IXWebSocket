@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-bs-theme="light">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,14 +10,15 @@
         <link rel="shortcut icon" href="../img/favicon.ico">
         <title>Design - IXWebSocket</title>
         <link href="../css/bootstrap.min.css" rel="stylesheet">
-        <link href="../css/font-awesome.min.css" rel="stylesheet">
+        <link href="../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../css/brands.min.css" rel="stylesheet">
+        <link href="../css/solid.min.css" rel="stylesheet">
+        <link href="../css/v4-font-face.min.css" rel="stylesheet">
         <link href="../css/base.css" rel="stylesheet">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
-
-        <script src="../js/jquery-1.10.2.min.js" defer></script>
-        <script src="../js/bootstrap.min.js" defer></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-        <script>hljs.initHighlightingOnLoad();</script> 
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
     </head>
 
     <body>
@@ -25,7 +26,7 @@
             <div class="container">
                 <a class="navbar-brand" href="..">IXWebSocket</a>
                 <!-- Expander button -->
-                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse">
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
@@ -33,35 +34,38 @@
                 <div id="navbar-collapse" class="navbar-collapse collapse">
                         <!-- Main navigation -->
                         <ul class="nav navbar-nav">
-                            <li class="navitem">
+                            <li class="nav-item">
                                 <a href=".." class="nav-link">Home</a>
                             </li>
-                            <li class="navitem">
+                            <li class="nav-item">
                                 <a href="../CHANGELOG/" class="nav-link">Changelog</a>
                             </li>
-                            <li class="navitem">
+                            <li class="nav-item">
+                                <a href="../autobahn/" class="nav-link">Autobahn compliance</a>
+                            </li>
+                            <li class="nav-item">
                                 <a href="../build/" class="nav-link">Build</a>
                             </li>
-                            <li class="navitem active">
-                                <a href="./" class="nav-link">Design</a>
+                            <li class="nav-item">
+                                <a href="./" class="nav-link active" aria-current="page">Design</a>
                             </li>
-                            <li class="navitem">
+                            <li class="nav-item">
                                 <a href="../packages/" class="nav-link">Packages</a>
                             </li>
-                            <li class="navitem">
+                            <li class="nav-item">
                                 <a href="../performance/" class="nav-link">Performance</a>
                             </li>
-                            <li class="navitem">
+                            <li class="nav-item">
                                 <a href="../usage/" class="nav-link">Examples</a>
                             </li>
-                            <li class="navitem">
+                            <li class="nav-item">
                                 <a href="../ws/" class="nav-link">Ws</a>
                             </li>
                         </ul>
 
-                    <ul class="nav navbar-nav ml-auto">
+                    <ul class="nav navbar-nav ms-md-auto">
                         <li class="nav-item">
-                            <a href="#" class="nav-link" data-toggle="modal" data-target="#mkdocs_search_modal">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
                                 <i class="fa fa-search"></i> Search
                             </a>
                         </li>
@@ -82,28 +86,28 @@
 
         <div class="container">
             <div class="row">
-                    <div class="col-md-3"><div class="navbar-light navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
     <div class="navbar-header">
-        <button type="button" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#toc-collapse" title="Table of Contents">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
             <span class="fa fa-angle-down"></span>
         </button>
     </div>
 
     
-    <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
         <ul class="nav flex-column">
             
-            <li class="nav-item" data-level="2"><a href="#implementation-details" class="nav-link">Implementation details</a>
+            <li class="nav-item" data-bs-level="2"><a href="#implementation-details" class="nav-link">Implementation details</a>
               <ul class="nav flex-column">
               </ul>
             </li>
             
-            <li class="nav-item" data-level="2"><a href="#limitations" class="nav-link">Limitations</a>
+            <li class="nav-item" data-bs-level="2"><a href="#limitations" class="nav-link">Limitations</a>
               <ul class="nav flex-column">
               </ul>
             </li>
             
-            <li class="nav-item" data-level="2"><a href="#c-code-organization" class="nav-link">C++ code organization</a>
+            <li class="nav-item" data-bs-level="2"><a href="#c-code-organization" class="nav-link">C++ code organization</a>
               <ul class="nav flex-column">
               </ul>
             </li>
@@ -119,7 +123,7 @@
 <p>Connections can be optionally secured and encrypted with TLS/SSL when using a wss:// endpoint, or using normal un-encrypted socket with ws:// endpoints. AppleSSL is used on iOS and macOS, OpenSSL and mbedTLS can be used on Android, Linux and Windows.</p>
 <p>If you are using OpenSSL, try to be on a version higher than 1.1.x as there there are thread safety problems with 1.0.x.</p>
 <h3 id="polling-and-background-thread-work">Polling and background thread work</h3>
-<p>No manual polling to fetch data is required. Data is sent and received instantly by using a background thread for receiving data and the select <a href="http://man7.org/linux/man-pages/man2/select.2.html">system</a> call to be notified by the OS of incoming data. No timeout is used for select so that the background thread is only woken up when data is available, to optimize battery life. This is also the recommended way of using select according to the select tutorial, section <a href="https://linux.die.net/man/2/select_tut">select law</a>. Read and Writes to the socket are non blocking. Data is sent right away and not enqueued by writing directly to the socket, which is <a href="https://stackoverflow.com/questions/1981372/are-parallel-calls-to-send-recv-on-the-same-socket-valid">possible</a> since system socket implementations allow concurrent read/writes. However concurrent writes need to be protected with mutex.</p>
+<p>No manual polling to fetch data is required. Data is sent and received instantly by using a background thread for receiving data and the select <a href="http://man7.org/linux/man-pages/man2/select.2.html">system</a> call to be notified by the OS of incoming data. No timeout is used for select so that the background thread is only woken up when data is available, to optimize battery life. This is also the recommended way of using select according to the select tutorial, section <a href="https://linux.die.net/man/2/select_tut">select law</a>. Read and Writes to the socket are non blocking. Data is sent right away and not enqueued by writing directly to the socket, which is <a href="https://stackoverflow.com/questions/1981372/are-parallel-calls-to-send-recv-on-the-same-socket-valid">possible</a> since system socket implementations allow concurrent read/writes.</p>
 <h3 id="automatic-reconnection">Automatic reconnection</h3>
 <p>If the remote end (server) breaks the connection, the code will try to perpetually reconnect, by using an exponential backoff strategy, capped at one retry every 10 seconds. This behavior can be disabled.</p>
 <h3 id="large-messages">Large messages</h3>
@@ -128,13 +132,6 @@
 <p>The library has an interactive tool which is handy for testing compatibility ith other libraries. We have tested our client against Python, Erlang, Node.js, and C++ websocket server libraries.</p>
 <p>The unittest tries to be comprehensive, and has been running on multiple platforms, with different sanitizers such as a thread sanitizer to catch data races or the undefined behavior sanitizer.</p>
 <p>The regression test is running after each commit on github actions for multiple configurations.</p>
-<ul>
-<li>Linux</li>
-<li>macOS with thread sanitizer</li>
-<li>macOS, with OpenSSL, with thread sanitizer</li>
-<li>macOS, with MbedTLS, with thread sanitizer</li>
-<li>Windows, with MbedTLS (the unittest is not run yet)</li>
-</ul>
 <h2 id="limitations">Limitations</h2>
 <ul>
 <li>On some configuration (mostly Android) certificate validation needs to be setup so that SocketTLSOptions.caFile point to a pem file, such as the one distributed by Firefox. Unless that setup is done connecting to a wss endpoint will display an error. With mbedtls the message will contain <code>error in handshake : X509 - Certificate verification failed, e.g. CRL, CA or signature check failed</code>.</li>
@@ -183,31 +180,29 @@
             <hr>
             <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
         </footer>
+        <script src="../js/bootstrap.bundle.min.js"></script>
         <script>
             var base_url = "..",
                 shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
         </script>
-        <script src="../js/base.js" defer></script>
-        <script src="../search/main.js" defer></script>
+        <script src="../js/base.js"></script>
+        <script src="../search/main.js"></script>
 
         <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title" id="searchModalLabel">Search</h4>
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <p>
-                    From here you can search these documents. Enter
-                    your search terms below.
-                </p>
+                <p>From here you can search these documents. Enter your search terms below.</p>
                 <form>
                     <div class="form-group">
                         <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
                     </div>
                 </form>
-                <div id="mkdocs-search-results"></div>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
             </div>
             <div class="modal-footer">
             </div>
@@ -218,7 +213,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
               <table class="table">

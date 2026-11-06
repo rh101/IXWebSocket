@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-bs-theme="light">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,14 +10,15 @@
         <link rel="shortcut icon" href="../img/favicon.ico">
         <title>Examples - IXWebSocket</title>
         <link href="../css/bootstrap.min.css" rel="stylesheet">
-        <link href="../css/font-awesome.min.css" rel="stylesheet">
+        <link href="../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../css/brands.min.css" rel="stylesheet">
+        <link href="../css/solid.min.css" rel="stylesheet">
+        <link href="../css/v4-font-face.min.css" rel="stylesheet">
         <link href="../css/base.css" rel="stylesheet">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
-
-        <script src="../js/jquery-1.10.2.min.js" defer></script>
-        <script src="../js/bootstrap.min.js" defer></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-        <script>hljs.initHighlightingOnLoad();</script> 
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
     </head>
 
     <body>
@@ -25,7 +26,7 @@
             <div class="container">
                 <a class="navbar-brand" href="..">IXWebSocket</a>
                 <!-- Expander button -->
-                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse">
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
@@ -33,35 +34,38 @@
                 <div id="navbar-collapse" class="navbar-collapse collapse">
                         <!-- Main navigation -->
                         <ul class="nav navbar-nav">
-                            <li class="navitem">
+                            <li class="nav-item">
                                 <a href=".." class="nav-link">Home</a>
                             </li>
-                            <li class="navitem">
+                            <li class="nav-item">
                                 <a href="../CHANGELOG/" class="nav-link">Changelog</a>
                             </li>
-                            <li class="navitem">
+                            <li class="nav-item">
+                                <a href="../autobahn/" class="nav-link">Autobahn compliance</a>
+                            </li>
+                            <li class="nav-item">
                                 <a href="../build/" class="nav-link">Build</a>
                             </li>
-                            <li class="navitem">
+                            <li class="nav-item">
                                 <a href="../design/" class="nav-link">Design</a>
                             </li>
-                            <li class="navitem">
+                            <li class="nav-item">
                                 <a href="../packages/" class="nav-link">Packages</a>
                             </li>
-                            <li class="navitem">
+                            <li class="nav-item">
                                 <a href="../performance/" class="nav-link">Performance</a>
                             </li>
-                            <li class="navitem active">
-                                <a href="./" class="nav-link">Examples</a>
+                            <li class="nav-item">
+                                <a href="./" class="nav-link active" aria-current="page">Examples</a>
                             </li>
-                            <li class="navitem">
+                            <li class="nav-item">
                                 <a href="../ws/" class="nav-link">Ws</a>
                             </li>
                         </ul>
 
-                    <ul class="nav navbar-nav ml-auto">
+                    <ul class="nav navbar-nav ms-md-auto">
                         <li class="nav-item">
-                            <a href="#" class="nav-link" data-toggle="modal" data-target="#mkdocs_search_modal">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
                                 <i class="fa fa-search"></i> Search
                             </a>
                         </li>
@@ -82,44 +86,44 @@
 
         <div class="container">
             <div class="row">
-                    <div class="col-md-3"><div class="navbar-light navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
     <div class="navbar-header">
-        <button type="button" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#toc-collapse" title="Table of Contents">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
             <span class="fa fa-angle-down"></span>
         </button>
     </div>
 
     
-    <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
         <ul class="nav flex-column">
             
-            <li class="nav-item" data-level="1"><a href="#examples" class="nav-link">Examples</a>
+            <li class="nav-item" data-bs-level="1"><a href="#examples" class="nav-link">Examples</a>
               <ul class="nav flex-column">
-            <li class="nav-item" data-level="2"><a href="#windows-note" class="nav-link">Windows note</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            <li class="nav-item" data-level="2"><a href="#websocket-client-api" class="nav-link">WebSocket client API</a>
+            <li class="nav-item" data-bs-level="2"><a href="#windows-note" class="nav-link">Windows note</a>
               <ul class="nav flex-column">
               </ul>
             </li>
-            <li class="nav-item" data-level="2"><a href="#handshake-timeout" class="nav-link">Handshake timeout</a>
+            <li class="nav-item" data-bs-level="2"><a href="#websocket-client-api" class="nav-link">WebSocket client API</a>
               <ul class="nav flex-column">
               </ul>
             </li>
-            <li class="nav-item" data-level="2"><a href="#websocket-server-api" class="nav-link">WebSocket server API</a>
+            <li class="nav-item" data-bs-level="2"><a href="#handshake-timeout" class="nav-link">Handshake timeout</a>
               <ul class="nav flex-column">
               </ul>
             </li>
-            <li class="nav-item" data-level="2"><a href="#http-client-api" class="nav-link">HTTP client API</a>
+            <li class="nav-item" data-bs-level="2"><a href="#websocket-server-api" class="nav-link">WebSocket server API</a>
               <ul class="nav flex-column">
               </ul>
             </li>
-            <li class="nav-item" data-level="2"><a href="#http-server-api" class="nav-link">HTTP server API</a>
+            <li class="nav-item" data-bs-level="2"><a href="#http-client-api" class="nav-link">HTTP client API</a>
               <ul class="nav flex-column">
               </ul>
             </li>
-            <li class="nav-item" data-level="2"><a href="#tls-support-and-configuration" class="nav-link">TLS support and configuration</a>
+            <li class="nav-item" data-bs-level="2"><a href="#http-server-api" class="nav-link">HTTP server API</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#tls-support-and-configuration" class="nav-link">TLS support and configuration</a>
               <ul class="nav flex-column">
               </ul>
             </li>
@@ -133,7 +137,7 @@
 <h1 id="examples">Examples</h1>
 <p>The <a href="https://github.com/machinezone/IXWebSocket/tree/master/ws"><em>ws</em></a> folder countains many interactive programs for chat, <a href="https://github.com/machinezone/IXWebSocket/blob/master/ws/ws_send.cpp">file transfers</a>, <a href="https://github.com/machinezone/IXWebSocket/blob/master/ws/ws_http_client.cpp">curl like</a> http clients, demonstrating client and server usage.</p>
 <h2 id="windows-note">Windows note</h2>
-<p>To use the network system on Windows, you need to initialize it once with <em>WSAStartup()</em> and clean it up with <em>WSACleanup()</em>. We have helpers for that which you can use, see below. This init would typically take place in your main function.</p>
+<p>To use the network system on Windows, you need to initialize it once with <em>WSAStartup()</em> and clean it up with <em>WSACleanup()</em>. We have helpers for that which you can use, see below. This init would typically take place in your main function. On every platform, <em>ix::uninitNetSystem()</em> also releases process-global TLS state (mbedTLS PSA crypto, with mbedTLS &gt;= 3.6), so call it only after all sockets are closed.</p>
 <pre><code class="language-cpp">#include &lt;ixwebsocket/IXNetSystem.h&gt;
 
 int main()
@@ -161,7 +165,8 @@ webSocket.setUrl(url);
 // to make sure that load balancers do not kill an idle connection.
 webSocket.setPingInterval(45);
 
-// Per message deflate connection is enabled by default. You can tweak its parameters or disable it
+// Per message deflate connection is not enabled by default. You can tweak its parameters, enable or disable it with
+webSocket.enablePerMessageDeflate();
 webSocket.disablePerMessageDeflate();
 
 // Setup a callback to be fired when a message or an event (open, close, error) is received
@@ -195,7 +200,7 @@ webSocket.stop()
 <p>Here is an example code snippet copied from the ws send sub-command. Each fragment weights 32K, so the total integer is the wireSize divided by 32K. As an example if you are sending 32M of data, uncompressed, total will be 1000. current will be set to 0 for the first fragment, then 1, 2 etc...</p>
 <pre><code>auto result =
     _webSocket.sendBinary(serializedMsg, [this, throttle](int current, int total) -&gt; bool {
-        spdlog::info(&quot;ws_send: Step {} out of {}&quot;, current + 1, total);
+        ix::logInfo(&quot;ws_send: Step {} out of {}&quot;, current + 1, total);
 
         if (throttle)
         {
@@ -205,6 +210,14 @@ webSocket.stop()
 
         return _connected;
     });
+</code></pre>
+<p>The <code>send()</code> and <code>sendText()</code> methods check that the string contains only valid UTF-8 characters. If you know that the string is a valid UTF-8 string you can skip that step and use the <code>sendUtf8Text</code> method instead.</p>
+<p>With the IXWebSocketSendData overloads of <code>sendUtf8Text</code> and <code>sendBinary</code> it is possible to not only send std::string but also <code>std::vector&lt;char&gt;</code>, <code>std::vector&lt;uint8_t&gt;</code> and <code>char*</code>.</p>
+<pre><code>std::vector&lt;uint8_t&gt; data({1, 2, 3, 4});
+auto result = webSocket.sendBinary(data);
+
+const char* text = &quot;Hello World!&quot;;
+result = webSocket.sendUtf8Text(IXWebSocketSendData(text, strlen(text)));
 </code></pre>
 <h3 id="readystate">ReadyState</h3>
 <p><code>getReadyState()</code> returns the state of the connection. There are 4 possible states.</p>
@@ -249,9 +262,9 @@ webSocket.stop()
         {
             std::stringstream ss;
             ss &lt;&lt; &quot;Error: &quot;         &lt;&lt; msg-&gt;errorInfo.reason      &lt;&lt; std::endl;
-            ss &lt;&lt; &quot;#retries: &quot;      &lt;&lt; msg-&gt;eventInfo.retries     &lt;&lt; std::endl;
-            ss &lt;&lt; &quot;Wait time(ms): &quot; &lt;&lt; msg-&gt;eventInfo.wait_time   &lt;&lt; std::endl;
-            ss &lt;&lt; &quot;HTTP Status: &quot;   &lt;&lt; msg-&gt;eventInfo.http_status &lt;&lt; std::endl;
+            ss &lt;&lt; &quot;#retries: &quot;      &lt;&lt; msg-&gt;errorInfo.retries     &lt;&lt; std::endl;
+            ss &lt;&lt; &quot;Wait time(ms): &quot; &lt;&lt; msg-&gt;errorInfo.wait_time   &lt;&lt; std::endl;
+            ss &lt;&lt; &quot;HTTP Status: &quot;   &lt;&lt; msg-&gt;errorInfo.http_status &lt;&lt; std::endl;
             std::cout &lt;&lt; ss.str() &lt;&lt; std::endl;
         }
     }
@@ -294,6 +307,17 @@ idle connection.</p>
 headers[&quot;foo&quot;] = &quot;bar&quot;;
 webSocket.setExtraHeaders(headers);
 </code></pre>
+<p>To omit automatically generated <code>User-Agent</code> or <code>Origin</code> headers, set their names
+explicitly:</p>
+<pre><code class="language-cpp">webSocket.setDisabledDefaultHeaders({&quot;User-Agent&quot;, &quot;Origin&quot;});
+</code></pre>
+<p>Names are case-insensitive. Only these optional defaults can be disabled; required
+handshake headers and other names are unaffected. Headers supplied through
+<code>setExtraHeaders()</code> always take precedence and are sent even when their values
+are empty. Pass an empty list to restore the defaults:</p>
+<pre><code class="language-cpp">webSocket.setDisabledDefaultHeaders({});
+</code></pre>
+<p>Changes apply to subsequent connections, including automatic reconnections.</p>
 <h3 id="subprotocols">Subprotocols</h3>
 <p>You can specify subprotocols to be set during the WebSocket handshake. For more info you can refer to <a href="https://hpbn.co/websocket/#subprotocol-negotiation">this doc</a>.</p>
 <pre><code class="language-cpp">webSocket.addSubprotocol(&quot;appProtocol-v1&quot;);
@@ -344,6 +368,7 @@ uint32_t m = webSocket.getMinWaitBetweenReconnectionRetries();
 setHandshakeTimeout(handshakeTimeoutSecs);
 </code></pre>
 <h2 id="websocket-server-api">WebSocket server API</h2>
+<p>TLS handshakes run in individual connection workers, so an idle peer does not block other clients from connecting. Server TLS handshakes have a 10-second timeout and are cancelled when the server stops. The maximum connection limit includes clients whose TLS handshake is still pending.</p>
 <h3 id="legacy-api">Legacy api</h3>
 <p>This api was actually changed to take a weak_ptr<WebSocket> as the first argument to setOnConnectionCallback ; previously it would take a shared_ptr<WebSocket> which was creating cycles and then memory leaks problems.</p>
 <pre><code class="language-cpp">#include &lt;ixwebsocket/IXWebSocketServer.h&gt;
@@ -352,7 +377,9 @@ setHandshakeTimeout(handshakeTimeoutSecs);
 
 // Run a server on localhost at a given port.
 // Bound host name, max connections and listen backlog can also be passed in as parameters.
-ix::WebSocketServer server(port);
+int port = 8008;
+std::string host(&quot;127.0.0.1&quot;); // If you need this server to be accessible on a different machine, use &quot;0.0.0.0&quot;
+ix::WebSocketServer server(port, host);
 
 server.setOnConnectionCallback(
     [&amp;server](std::weak_ptr&lt;WebSocket&gt; webSocket,
@@ -430,7 +457,9 @@ server.wait();
 
 // Run a server on localhost at a given port.
 // Bound host name, max connections and listen backlog can also be passed in as parameters.
-ix::WebSocketServer server(port);
+int port = 8008;
+std::string host(&quot;127.0.0.1&quot;); // If you need this server to be accessible on a different machine, use &quot;0.0.0.0&quot;
+ix::WebSocketServer server(port, host);
 
 server.setOnClientMessageCallback([](std::shared_ptr&lt;ix::ConnectionState&gt; connectionState, ix::WebSocket &amp; webSocket, const ix::WebSocketMessagePtr &amp; msg) {
     // The ConnectionState object contains information about the connection,
@@ -485,6 +514,26 @@ server.start();
 // Block until server.stop() is called.
 server.wait();
 
+</code></pre>
+<h3 id="heartbeat_1">Heartbeat</h3>
+<p>You can configure an optional heartbeat / keep-alive for the WebSocket server. The heartbeat interval can be adjusted or disabled when constructing the <code>WebSocketServer</code>. Setting the interval to <code>-1</code> disables the heartbeat feature; this is the default setting. The parameter you set will be applied to every <code>WebSocket</code> object that the server creates.</p>
+<p>To enable a 45 second heartbeat on a <code>WebSocketServer</code>:</p>
+<pre><code class="language-cpp">int pingIntervalSeconds = 45;
+ix::WebSocketServer server(port, host, backlog, maxConnections, handshakeTimeoutSecs, addressFamily, pingIntervalSeconds);
+</code></pre>
+<h3 id="server-log-callback">Server log callback</h3>
+<p>By default the server writes internal errors to stderr (and some info messages to stdout). Errors that happen before a connection is fully established — for example a failed TLS handshake when a client presents a bad certificate — cannot be reported through <code>setOnClientMessageCallback</code>, since no WebSocket object exists yet at that point.</p>
+<p>To capture those messages in your application logs, set a log callback. It applies to <code>WebSocketServer</code> as well as <code>HttpServer</code>. When a callback is set, messages are delivered to it instead of being written to stderr/stdout.</p>
+<pre><code class="language-cpp">server.setLogCallback([](ix::LogLevel level, const std::string&amp; msg) {
+    if (level == ix::LogLevel::Error)
+    {
+        myLogger.error(msg);
+    }
+    else
+    {
+        myLogger.info(msg);
+    }
+});
 </code></pre>
 <h2 id="http-client-api">HTTP client API</h2>
 <pre><code class="language-cpp">#include &lt;ixwebsocket/IXHttpClient.h&gt;
@@ -563,15 +612,28 @@ bool async = true;
 HttpClient httpClient(async);
 auto args = httpClient.createRequest(url, HttpClient::kGet);
 
+// If you define a chunk callback it will be called repeteadly with the
+// incoming data. This allows to process data on the go or write it to disk
+// instead of accumulating the data in memory.
+args.onChunkCallback = [](const std::string&amp; data)
+{
+    // process data
+};
+
 // Push the request to a queue,
 bool ok = httpClient.performRequest(args, [](const HttpResponsePtr&amp; response)
     {
         // This callback execute in a background thread. Make sure you uses appropriate protection such as mutex
         auto statusCode = response-&gt;statusCode; // acess results
+
+        // response-&gt;body is empty if onChunkCallback was used
     }
 );
 
 // ok will be false if your httpClient is not async
+
+// A request in progress can be cancelled by setting the cancel flag. It does nothing if the request already completed.
+args-&gt;cancel = true;
 </code></pre>
 <p>See this <a href="https://github.com/machinezone/IXWebSocket/issues/209">issue</a> for links about uploading files with HTTP multipart.</p>
 <h2 id="http-server-api">HTTP server API</h2>
@@ -633,7 +695,34 @@ server.wait();
 <p>For a client, specifying <code>caFile</code> can be used if connecting to a server that uses a self-signed cert, or when using a custom CA in an internal environment.</p>
 <p>For a server, specifying <code>caFile</code> implies that:
 1. You require clients to present a certificate
-1. It must be signed by one of the trusted roots in the file</p></div>
+1. It must be signed by one of the trusted roots in the file</p>
+<p>By default, a destination's hostname is always validated against the certificate that it presents. To accept certificates with any hostname, set <code>ix::SocketTLSOptions::disable_hostname_validation</code> to <code>true</code>.</p>
+<h3 id="networkframework-backend-on-macos">Network.framework backend on macOS</h3>
+<p>Build with <code>USE_NETWORK_FRAMEWORK=ON</code> to use native TLS for <code>wss://</code> and <code>https://</code>
+clients and TLS-enabled WebSocket/HTTP servers. Network.framework handles connection
+setup, DNS, and TCP. Application HTTP and WebSocket handling stays in IXWebSocket.
+TLS 1.2 is the minimum; TLS 1.3 is negotiated when supported by the peer.</p>
+<p>The existing <code>SocketTLSOptions</code> fields apply:</p>
+<ul>
+<li><code>certFile</code> and <code>keyFile</code> accept a PEM certificate chain (leaf first) and matching,
+  unencrypted PEM private key. Both are required for a TLS server and optional for a
+  client presenting a certificate. Credentials are imported in memory, without
+  installing them in a keychain.</li>
+<li><code>caFile = "SYSTEM"</code> uses Apple's trust evaluation and configured system trust.
+  A PEM CA file or in-memory PEM bundle instead restricts trust to those anchors.</li>
+<li><code>caFile = "NONE"</code> disables peer verification. On a server this also disables the
+  requirement for a client certificate. Other CA settings require client
+  authentication, matching the existing server options.</li>
+<li><code>disable_hostname_validation</code> skips the client's hostname check while retaining
+  certificate trust evaluation. IP literals are checked against IP SAN entries.</li>
+<li>Custom <code>ciphers</code> strings are currently rejected; leave <code>ciphers</code> at <code>DEFAULT</code>.</li>
+</ul>
+<p>The native server uses a Network.framework listener. <code>createSocket</code> cannot adopt an
+existing BSD descriptor for TLS with this backend. The listener requires a numeric
+bind address and uses the framework's TCP listen queue rather than the BSD backlog
+setting. Pending connections are bounded by <code>maxConnections</code>. Server TLS handshakes
+have a ten-second limit and are interrupted when the server stops. Client connection
+timeouts use the caller's cancellation callback, including HTTP/WebSocket timeouts.</p></div>
             </div>
         </div>
 
@@ -641,31 +730,29 @@ server.wait();
             <hr>
             <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
         </footer>
+        <script src="../js/bootstrap.bundle.min.js"></script>
         <script>
             var base_url = "..",
                 shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
         </script>
-        <script src="../js/base.js" defer></script>
-        <script src="../search/main.js" defer></script>
+        <script src="../js/base.js"></script>
+        <script src="../search/main.js"></script>
 
         <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title" id="searchModalLabel">Search</h4>
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <p>
-                    From here you can search these documents. Enter
-                    your search terms below.
-                </p>
+                <p>From here you can search these documents. Enter your search terms below.</p>
                 <form>
                     <div class="form-group">
                         <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
                     </div>
                 </form>
-                <div id="mkdocs-search-results"></div>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
             </div>
             <div class="modal-footer">
             </div>
@@ -676,7 +763,7 @@ server.wait();
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
               <table class="table">
